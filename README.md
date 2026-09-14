@@ -1,38 +1,38 @@
 # Android Drop
 
-Нативное macOS-приложение (Cocoa/Objective-C) для переноса файлов на Android по ADB перетаскиванием.
+Native macOS app (Cocoa/Objective-C) for dropping files onto an Android device over ADB.
 
-Перетащите файлы или папки в окно приложения — они уйдут на подключённое Android-устройство через `adb push`. Никакого iTunes-подобного клиента, никакого Android File Transfer — просто окно и drag-n-drop.
+Drag files or folders into the app window — they get pushed to the connected Android device via `adb push`. No iTunes-style client, no Android File Transfer — just a window and drag-n-drop.
 
-## Возможности
+## Features
 
-- Drag-and-drop файлов и папок из Finder прямо в окно приложения
-- Автоматическое определение подключённого устройства (опрос `adb devices`)
-- Кнопка Browse для выбора и просмотра папки назначения на устройстве
-- Пути передаются в `adb shell` одной экранированной командой — корректно обрабатываются пробелы, юникод, скобки и прочая пунктуация
-- Ошибки создания папок на устройстве показываются с реальным выводом ADB, а не общей заглушкой
-- Лог работы пишется в `~/Library/Logs/AndroidDrop.log`
+- Drag-and-drop files and folders from Finder straight into the app window
+- Automatic device detection (polls `adb devices`)
+- Browse button to pick and inspect the destination folder on the device
+- Paths are passed to `adb shell` as a single quoted command — spaces, Unicode, parentheses and other punctuation are handled correctly
+- Folder-creation errors show the actual ADB output instead of a generic message
+- Activity log written to `~/Library/Logs/AndroidDrop.log`
 
-## Требования
+## Requirements
 
-- macOS 12.0 (Monterey) или новее
-- Xcode Command Line Tools (для сборки из исходников)
-- [Android Platform Tools (adb)](https://developer.android.com/tools/releases/platform-tools) — приложение ищет `adb` по очереди в:
+- macOS 12.0 (Monterey) or later
+- Xcode Command Line Tools (to build from source)
+- [Android Platform Tools (adb)](https://developer.android.com/tools/releases/platform-tools) — the app looks for `adb` in order at:
   1. `/opt/homebrew/bin/adb`
   2. `/usr/local/bin/adb`
   3. `~/Library/Android/sdk/platform-tools/adb`
   4. `/usr/bin/adb`
-  5. `adb` в `$PATH`
+  5. `adb` on `$PATH`
 
-Быстрее всего поставить adb через Homebrew:
+Easiest way to install adb via Homebrew:
 
 ```bash
 brew install android-platform-tools
 ```
 
-- На самом Android-устройстве должна быть включена **отладка по USB** (Настройки → Для разработчиков → Отладка по USB), устройство должно быть подключено по USB (или Wi-Fi ADB) и авторизовано.
+- On the Android device, **USB debugging** must be enabled (Settings → Developer options → USB debugging), the device must be connected over USB (or Wi-Fi ADB) and authorized.
 
-## Сборка
+## Build
 
 ```bash
 git clone git@github.com:Blunt0FF/AndroidDrop.git
@@ -40,20 +40,20 @@ cd AndroidDrop
 ./build.command
 ```
 
-Скрипт соберёт `Android Drop.app` в корне репозитория (иконка генерируется из `AndroidDropIcon.png`). Готовое приложение можно перетащить в `/Applications`.
+The script builds `Android Drop.app` in the repo root (the icon is generated from `AndroidDropIcon.png`). Drag the resulting app into `/Applications`.
 
-Либо забрать готовую сборку из [Releases](../../releases) — без установки Xcode.
+Or grab a prebuilt binary from [Releases](../../releases) — no Xcode required.
 
-## Использование
+## Usage
 
-1. Запустите `Android Drop.app`.
-2. Подключите Android-устройство по USB и разрешите отладку.
-3. Дождитесь, пока приложение определит устройство.
-4. При необходимости нажмите **Browse**, чтобы выбрать папку на устройстве, либо впишите путь вручную.
-5. Перетащите файлы или папки в окно — передача начнётся автоматически.
+1. Launch `Android Drop.app`.
+2. Connect the Android device over USB and authorize debugging.
+3. Wait for the app to detect the device.
+4. Optionally click **Browse** to pick a destination folder on the device, or type a path manually.
+5. Drag files or folders into the window — the transfer starts automatically.
 
-Если что-то пошло не так — смотрите `~/Library/Logs/AndroidDrop.log`.
+If something goes wrong, check `~/Library/Logs/AndroidDrop.log`.
 
-## Лицензия
+## License
 
 [MIT](LICENSE)
