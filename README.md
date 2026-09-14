@@ -1,5 +1,7 @@
 # Android Drop
 
+<img src="AndroidDropIcon.png" alt="Android Drop icon" width="128" height="128">
+
 Native macOS app (Cocoa/Objective-C) for dropping files onto an Android device over ADB.
 
 Drag files or folders into the app window — they get pushed to the connected Android device via `adb push`. No iTunes-style client, no Android File Transfer — just a window and drag-n-drop.
