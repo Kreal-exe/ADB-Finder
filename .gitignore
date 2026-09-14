@@ -1,0 +1,5 @@
+.build/
+*.app
+*.icns
+.DS_Store
+__MACOSX/
