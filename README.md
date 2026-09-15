@@ -37,7 +37,7 @@ brew install android-platform-tools
 ## Build
 
 ```bash
-git clone git@github.com:Blunt0FF/AndroidDrop.git
+git clone git@github.com:Kreal-exe/AndroidDrop.git
 cd AndroidDrop
 ./build.command
 ```
