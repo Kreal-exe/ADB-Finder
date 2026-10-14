@@ -8,7 +8,8 @@ CLANG="$(xcrun --sdk macosx --find clang)"
 OUT="$ROOT/.build"
 ICONSET="$OUT/AndroidDrop.iconset"
 
-echo "Building Android Drop 16.0 (native Cocoa)..."
+VERSION="1.0.1"
+echo "Building Android Drop $VERSION (native Cocoa)..."
 rm -rf "$OUT" "$APP" "$ROOT/AndroidDrop.icns"
 mkdir -p "$OUT/$APP/Contents/MacOS" "$OUT/$APP/Contents/Resources" "$ICONSET"
 
@@ -27,7 +28,7 @@ if command -v sips >/dev/null 2>&1 && command -v iconutil >/dev/null 2>&1 && [ -
 fi
 
 "$CLANG" -fobjc-arc -Wall -Wextra -O2 -mmacosx-version-min=12.0 -isysroot "$SDK" -framework Cocoa "$SRC" -o "$OUT/$APP/Contents/MacOS/AndroidDrop"
-cat > "$OUT/$APP/Contents/Info.plist" <<'PLIST'
+cat > "$OUT/$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
@@ -36,11 +37,17 @@ cat > "$OUT/$APP/Contents/Info.plist" <<'PLIST'
 <key>CFBundleIdentifier</key><string>local.androiddrop.native</string>
 <key>CFBundleExecutable</key><string>AndroidDrop</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleVersion</key><string>17.0</string>
-<key>CFBundleShortVersionString</key><string>17.0</string>
+<key>CFBundleVersion</key><string>$VERSION</string>
+<key>CFBundleShortVersionString</key><string>$VERSION</string>
 <key>LSMinimumSystemVersion</key><string>12.0</string>
 <key>NSHighResolutionCapable</key><true/>
 <key>CFBundleIconFile</key><string>AndroidDrop.icns</string>
+<key>CFBundleDocumentTypes</key><array><dict>
+  <key>CFBundleTypeName</key><string>Any file or folder</string>
+  <key>CFBundleTypeRole</key><string>Viewer</string>
+  <key>LSHandlerRank</key><string>None</string>
+  <key>LSItemContentTypes</key><array><string>public.item</string><string>public.folder</string></array>
+</dict></array>
 </dict></plist>
 PLIST
 [ -f "$ROOT/AndroidDrop.icns" ] && cp "$ROOT/AndroidDrop.icns" "$OUT/$APP/Contents/Resources/AndroidDrop.icns"
