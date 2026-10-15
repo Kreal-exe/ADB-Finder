@@ -3,3 +3,4 @@
 *.icns
 .DS_Store
 __MACOSX/
+dist/
